@@ -1,4 +1,4 @@
-# Co-Splicing Indices 
+# Co-Splicing Indices (Prototype, requires stress test)
 
 Co-splicing Indices gives a quantitative measure of the strength and confidence of co-splicing.
 
