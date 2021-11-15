@@ -661,7 +661,9 @@ if __name__ == '__main__':
     # Filter out negative relative abundance values
     df_final = df_final.query('diff_relative_abundance >= 0')
     
-    # Set index
+    # Reset index
+    df_final.reset_index(inplace=True, drop=True)
+    # Put index as first column of dataframe for plotting purposes
     df_final.reset_index(level=0, inplace=True)
     
     print("")
