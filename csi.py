@@ -495,8 +495,8 @@ def process_diffRA(df, EU, cell_type, trmt, df_final):
     # splicing they can undergo
     possibilities = ( ('1', '1', "co-exclusion"), 
                        ('0', '0', "co-inclusion"),
-                       ('1', '0', "swap"), 
-                       ('0', '1', "swap") )
+                       ('1', '0', "exchange"), 
+                       ('0', '1', "exchange") )
     
     # For exon1 and exon2 in combinations of all exons
     for e1, e2 in combi:
