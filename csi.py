@@ -657,6 +657,9 @@ if __name__ == '__main__':
         print(f'Calculating for experiment unit "{x}", cell line "{y}" and treatment "{z}"')
         process_diffRA(df, x, y, z, df_final)
         print("Completed")
+        
+    # Filter out negative relative abundance values
+    df_final = df_final.query('diff_relative_abundance >= 0')
     
     # Set index
     df_final.reset_index(level=0, inplace=True)
