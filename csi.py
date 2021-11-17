@@ -579,6 +579,22 @@ def process_diffRA(df, EU, cell_type, trmt, df_final):
                             else:
                                 u, p = mannwhitneyu(out[4], out[5], use_continuity=True, 
                                              alternative='two-sided')
+                    
+                    ## Calculate magnitude, mnt
+                    treatment_cospliced_RA = sum(dfTreat['relative_abundance'])
+                    # Find the two intermediate forms; output is e.g. ( ('1','0'), ('0','1') )
+                    interm_forms = interm_dict[str(p1T) + str(p2T)]
+                    # Calculate RA for intermediate forms  
+                    p1a = interm_forms[0][0]
+                    p2a = interm_forms[0][1]
+                    p1b = interm_forms[1][0]
+                    p2b = interm_forms[1][1]
+                    control_intermediate_RA1 = sum(dfC.query(f'{e1}=={p1a} & {e2}=={p2a}')['relative_abundance'])
+                    control_intermediate_RA2 = sum(dfC.query(f'{e1}=={p1b} & {e2}=={p2b}')['relative_abundance'])
+                    # Calculate magnitude
+                    mnt = min(abs(control_intermediate_RA1-treatment_cospliced_RA), 
+                              abs(control_intermediate_RA2-treatment_cospliced_RA))
+                    
                     # Update df_final
                     df_final.loc[len(df_final)] = [EU,         # expt_unit
                                                    trmt,       # treatment
@@ -589,7 +605,8 @@ def process_diffRA(df, EU, cell_type, trmt, df_final):
                                                    out[2],     # cospliced isoforms in treatment
                                                    p,          # p-value
                                                    out[0],     # RA diff
-                                                   conf_calculator(out[1],out[2],p)] # confidence score
+                                                   conf_calculator(out[1],out[2],p),
+                                                   mnt] # confidence score
 
 def conf_calculator(contributing_isoforms, cospliced_isoforms, p): 
     a = 1/(contributing_isoforms)   
@@ -601,20 +618,20 @@ def conf_calculator(contributing_isoforms, cospliced_isoforms, p):
 
 def plot(df_final, plot_name, directory):
     fig = px.scatter(df_final, 
-                     x="confidence_score", 
+                     x="magnitude", 
                      y="diff_relative_abundance", 
                      color="expt_unit", 
+                     size = "confidence_score",
                      hover_data=['index'],
                      title="Co-Splicing Index",
                      labels={
-                         "confidence_score": "Confidence score",
+                         "magnitude": "Magnitude",
                          "diff_relative_abundance": "Difference in relative abundance of co-spliced isoform (treatment - control)",
                          "expt_unit": "Gene or experimental unit"},
                      template='seaborn')
     
-    fig.update_traces(marker=dict(size=12,
-                              line=dict(width=2,
-                                        color='DarkSlateGrey')),
+    fig.update_traces(marker=dict(line=dict(width=2,
+                                            color='DarkSlateGrey')),
                   selector=dict(mode='markers'))
     
     # Create directory for plots
@@ -639,6 +656,12 @@ if __name__ == '__main__':
     # Create dictionary to change 0 to 1 and vice versa
     swap_dict = {'1':'0', '0':'1'}
     
+    # Create dictionary to access intermediate forms for magnitude calculations
+    interm_dict = { '10':( ('0','0'), ('1','1') ),
+                   '01': ( ('0','0'), ('1','1') ),
+                   '11': ( ('1','0'), ('0','1') ),
+                   '00': ( ('1','0'), ('0','1') )}
+    
     # Create dataframe for storing output
     df_final = pd.DataFrame(columns = ["expt_unit", 
                                    "treatment", 
@@ -649,7 +672,8 @@ if __name__ == '__main__':
                                    "cospliced_isoforms",
                                    "p-value",
                                    "diff_relative_abundance",                                    
-                                   "confidence_score"])
+                                   "confidence_score",
+                                   "magnitude"])
     
     # Start CSI calculation on dataframe
     print("Initiating Co-Spliced Index (CSI) calculations")
