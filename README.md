@@ -23,5 +23,5 @@ You can try CSI.py with sample test_input.csv [here](https://github.com/CherWeiY
 1. Create a new folder. Put CSI.py and user_inputs.py in new folder.
 2. Edit user_inputs.py using any text editor.
 3. Navigate to new folder in Ubuntu. For example if your new folder named 'CSI' is on Desktop ```cd /mnt/c/Users/{username}/Desktop/CSI```
-4. Run ```python3 CSI.py``` on Ubuntu.
+4. Run ```python3 csi.py``` on Ubuntu.
 
