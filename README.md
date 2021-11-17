@@ -5,7 +5,7 @@ Co-splicing Indices gives a quantitative measure of the strength and confidence 
 Invitees to this repository are given a detailed powerpoint to explain the the mathematical and algorithmic concept of CSI.
 
 ## Installations
-PRIMERg runs on Linux. For Windows users, you can download Ubuntu (tested on Ubutun 20.04 but new versions should work. Installation guide: https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview)
+PRIMERg runs on Linux. For Windows users, you can download Ubuntu (tested on Ubutun 20.04. Installation guide: https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview)
 
 First, run: ```sudo apt update``` and ```sudo apt upgrade```
 
