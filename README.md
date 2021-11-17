@@ -9,7 +9,7 @@ PRIMERg runs on Linux. For Windows users, you can download Ubuntu (tested on Ubu
 
 First, run: ```sudo apt update``` and ```sudo apt upgrade```
 
-Check if you have Python 3.8.10 on Ubuntu (Confirm that Python3 is already install with ```python3 --version```. If you need to update your python version, do:  ```sudo apt upgrade python3```)
+Check if you have Python 3.8 on Ubuntu (Confirm that Python3 is already install with ```python3 --version```. If you need to update your python version, do:  ```sudo apt upgrade python3```)
 
 Get pip for python: ```sudo apt install python3-pip```
 
