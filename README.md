@@ -1,8 +1,12 @@
-# Co-Splicing Indices (Prototype, requires stress test)
+# Co-Splicing Indices 
 
-Co-splicing Indices gives a quantitative measure of the strength and confidence of co-splicing.
+Co-splicing Indices (CSI) gives a quantitative measure of the strength and confidence of co-splicing based on GeneScan data.
 
-Invitees to this repository are given a detailed powerpoint to explain the the mathematical and algorithmic concept of CSI.
+A detailed powerpoint to explain the the mathematical and algorithmic concept of CSI is uploaded to 'misc' folder in GitHub.
+
+The most important output from CSI is presented in an interactive html
+
+![alt text](https://github.com/CherWeiYuan/Co-SplicingIndices/blob/main/misc/CSI_html.png?raw=true)
 
 ## Installations
 PRIMERg runs on Linux. For Windows users, you can download Ubuntu (tested on Ubutun 20.04. Installation guide: https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview)
